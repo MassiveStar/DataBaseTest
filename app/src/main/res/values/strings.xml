@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">DataBaseTest20210213</string>
 
+    <!-- Output to TextView styled with a little HTML -->
+    <string name="title"><![CDATA[<h3>HERE IS YOUR USER DATA</h3>]]></string>
+    <string name="name"><![CDATA[<b>Nombre:</b>]]></string>
+    <string name="password"><![CDATA[<b>Password:</b>]]></string>
+    <string name="reg_time"><![CDATA[<b>Fecha de registro:</b>]]></string>
+
 </resources>
