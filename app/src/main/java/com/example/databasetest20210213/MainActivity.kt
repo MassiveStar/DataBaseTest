@@ -26,5 +26,12 @@ class MainActivity : AppCompatActivity() {
         binding.mainViewModel = mainViewModel
 
         binding.lifecycleOwner = this
+
+        binding.saveButton.setOnClickListener {
+            mainViewModel.onSaveUser(
+                binding.nameEdit.text.toString(),
+                binding.passwordEdit.text.toString()
+            )
+        }
     }
 }
