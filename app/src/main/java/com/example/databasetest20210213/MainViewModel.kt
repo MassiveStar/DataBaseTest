@@ -51,6 +51,12 @@ class MainViewModel(
         database.insert(user)
     }
 
+    fun onClearUsers(){
+        viewModelScope.launch {
+            database.clear()
+        }
+    }
+
     val usersString = Transformations.map(users){users ->
         formatUsers(users, application.resources)
     }

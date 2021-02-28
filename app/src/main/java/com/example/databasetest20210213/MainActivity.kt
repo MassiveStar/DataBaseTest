@@ -31,6 +31,11 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         binding.saveButton.setOnClickListener {
+            // Hide the keyboard.
+            val inputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(binding.saveButton.windowToken, 0)
+
             if (validateData()) {
                 mainViewModel.onSaveUser(
                     binding.nameEdit.text.toString(),
@@ -40,17 +45,19 @@ class MainActivity : AppCompatActivity() {
                 binding.passwordEdit.text.clear()
             }
         }
+
+        binding.clearButton.setOnClickListener {
+            mainViewModel.onClearUsers()
+        }
     }
 
     private fun validateData(): Boolean {
         if (binding.nameEdit.text.toString().trim().isEmpty()) {
-            hideKeyboard(binding.nameEdit.windowToken)
             binding.nameEdit.text.clear()
             Toast.makeText(this, "Debe ingresar un nombre", Toast.LENGTH_SHORT).show()
             return false
         }
         if (binding.passwordEdit.text.toString().trim().isEmpty()) {
-            hideKeyboard(binding.passwordEdit.windowToken)
             binding.passwordEdit.text.clear()
             Toast.makeText(this, "Debe ingresar un password", Toast.LENGTH_SHORT).show()
             return false
@@ -58,10 +65,4 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun hideKeyboard(windowToken: android.os.IBinder) {
-        // Hide the keyboard.
-        val inputMethodManager =
-            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
-    }
 }
