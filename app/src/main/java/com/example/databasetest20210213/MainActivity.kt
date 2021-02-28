@@ -1,10 +1,12 @@
 package com.example.databasetest20210213
 
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.databasetest20210213.database.UserDatabase
@@ -47,7 +49,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.clearButton.setOnClickListener {
-            mainViewModel.onClearUsers()
+            val alertDialog = AlertDialog.Builder(this)
+            alertDialog.setMessage("¿Quieres borrar todo el registro de datos?")
+            alertDialog.setPositiveButton("OK") { _, _ ->
+                mainViewModel.onClearUsers()
+            }
+            alertDialog.setNegativeButton("CANCELAR") { _, _ ->
+
+            }
+            alertDialog.show()
         }
     }
 
